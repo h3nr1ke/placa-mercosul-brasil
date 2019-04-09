@@ -1,0 +1,25 @@
+{
+  "name": "placa-mercosul-brasil",
+  "version": "1.0.0",
+  "description": "Converte a placa atual Brasileira para o novo formato Mercosul, inclui também um validador e máscara",
+  "main": "placa-mercosul-brasil.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h3nr1ke/placa-mercosul-brasil.git"
+  },
+  "keywords": [
+    "Mercosul",
+    "Placa",
+    "Brasil",
+    "Veículos"
+  ],
+  "author": "Henrique Deodato",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/h3nr1ke/placa-mercosul-brasil/issues"
+  },
+  "homepage": "https://github.com/h3nr1ke/placa-mercosul-brasil#readme"
+}
