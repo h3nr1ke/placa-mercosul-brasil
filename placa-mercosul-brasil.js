@@ -50,9 +50,9 @@ var ClassPlacaMercosul = class PlacaMerosul {
     /**
      * Retorna o a letra correspondente para alterar a placa antiga
      */
-    _conversionTable (number){
+    _conversionTable(number){
         let table = ["A","B","C","D","E","F","G","H","I","J"];
-        if( typeof number == "number" && number >=0 && number <= 9 ){
+        if( typeof number == "number" && number >= 0 && number <= 9 ){
             return table[number];
         }
         else{
@@ -81,8 +81,9 @@ var ClassPlacaMercosul = class PlacaMerosul {
         // eh uma placa antiga?
         let regexPlacaAntiga = /^([a-zA-Z]{3})([0-9])([0-9])([0-9]{2})$/;
         if( regexPlacaAntiga.test(placa) ){
+            let _t = this;
             return placa.replace(regexPlacaAntiga,function (st,m1,m2,m3,m4) { 
-                return ""+m1+m2+_conversionTable(parseInt(m3))+m4;
+                return ""+m1+m2+ _t._conversionTable( parseInt(m3) )+m4;
             });
         }
         else{
@@ -106,10 +107,10 @@ var ClassPlacaMercosul = class PlacaMerosul {
         return this._convert(placa);
     }
 
-    // apply mask the mask AAA.AAA.AAA-AA to the given CPF
+    // aplica a mascara para a placa informada
     mask(placa){
         if( this._validate(placa) ){
-            return placa.replace(/^(\d{3})(\d{4})$/, '$1\s$2');
+            return placa.replace(/^(.{3})(.{4})$/, '$1 $2');
         }
         else{
             console.log(`${placa} não é uma placa válida, máscara não aplicada`);

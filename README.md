@@ -2,6 +2,9 @@
 
 Converte a placa atual Brasileira para o novo formato Mercosul, inclui também um validador e máscara
 
+## Status
+[![Build Status](https://travis-ci.org/h3nr1ke/placa-mercosul-brasil.svg?branch=master)](https://travis-ci.org/h3nr1ke/placa-mercosul-brasil)
+
 ## Instalação
 
     npm i placa-mersocul-brasil
