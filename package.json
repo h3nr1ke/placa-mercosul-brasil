@@ -1,6 +1,6 @@
 {
   "name": "placa-mercosul-brasil",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Converte a placa atual Brasileira para o novo formato Mercosul, inclui também um validador e máscara",
   "main": "placa-mercosul-brasil.js",
   "scripts": {
