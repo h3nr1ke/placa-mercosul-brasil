@@ -9,6 +9,14 @@
 
 var ClassPlacaMercosul = class PlacaMerosul {
 
+    constructor(altura, largura) {
+      // define as regexes usadas
+      this.REGEX_PLACA_GENERICA = /^([a-zA-Z]{3})([0-9]([a-zA-Z]|[0-9])[0-9]{2})$/;
+      this.REGEX_PLACA_ANTIGA = /^([a-zA-Z]{3})([0-9])([0-9])([0-9]{2})$/;
+      this.REGEX_PLACA_NOVA = /^([a-zA-Z]{3})([0-9])([a-zA-Z])([0-9]{2})$/;
+      this.REGEX_REPLACE = /[^0-9A-Za-z]/g;
+    }
+
     /**
      * Gera um numero aleatorio entre 0 a 9
      * @return {integer} um numero aleatorio
@@ -26,7 +34,7 @@ var ClassPlacaMercosul = class PlacaMerosul {
         let i = 65  // menor valor possivel
 
         // gera um numero estre 65 e 90 e retorna a string correspondente ao codigo ASCII
-        return String.fromCharCode( Math.round( Math.random()*n ) + i );
+        return String.fromCharCode( Math.round( Math.random() * n ) + i );
     }
 
     /**
@@ -62,14 +70,13 @@ var ClassPlacaMercosul = class PlacaMerosul {
     }
 
     /**
-     * Valida se a placa informada eh valida ou nao
+     * Valida se a placa informada eh valida ou nao, tanto formato antigo quanto novo
      * @param  {string} placa valor a ser validado
      * @return {boolean}     true se valida, false se não...
      */
     _validate(placa){
-        let placaTemp = placa.replace(/[^0-9A-Za-z]/g,"");
-        let regex = /^([a-zA-Z]{3}[0-9]{4})|([a-zA-Z]{3}[0-9][a-zA-Z][0-9]{2})$/; 
-        return regex.test(placaTemp);
+        let placaTemp = placa.replace(this.REGEX_REPLACE,"");
+        return this.REGEX_PLACA_GENERICA.test(placaTemp);
     }
 
     /**
@@ -79,11 +86,10 @@ var ClassPlacaMercosul = class PlacaMerosul {
      */
     _convert(placa){
         // eh uma placa antiga?
-        let regexPlacaAntiga = /^([a-zA-Z]{3})([0-9])([0-9])([0-9]{2})$/;
-        if( regexPlacaAntiga.test(placa) ){
+        if( this.REGEX_PLACA_ANTIGA.test(placa) ){
             let _t = this;
-            return placa.replace(regexPlacaAntiga,function (st,m1,m2,m3,m4) { 
-                return ""+m1+m2+ _t._conversionTable( parseInt(m3) )+m4;
+            return placa.replace( this.REGEX_PLACA_ANTIGA, function(st, m1, m2, m3, m4) { 
+                return "" + m1 + m2 + _t._conversionTable(parseInt(m3)) + m4;
             });
         }
         else{
@@ -110,7 +116,7 @@ var ClassPlacaMercosul = class PlacaMerosul {
     // aplica a mascara para a placa informada
     mask(placa){
         if( this._validate(placa) ){
-            return placa.replace(/^(.{3})(.{4})$/, '$1 $2');
+            return placa.replace(this.REGEX_PLACA_GENERICA, '$1 $2');
         }
         else{
             console.log(`${placa} não é uma placa válida, máscara não aplicada`);
@@ -121,7 +127,7 @@ var ClassPlacaMercosul = class PlacaMerosul {
     // remove everything that is not a number
     unmask(placa){
         if( typeof placa == "string" ){
-            return placa.replace(/[^0-9A-Za-z]/g,"");
+            return placa.replace(this.REGEX_REPLACE,"");
         }
         else{
             console.log(`${placa} não é válido para esta operção [unmask], por favor informe uma string nos seguintes formatos AAA-9999, AAA 9999, AAA9999 ou AAA9A99 `);

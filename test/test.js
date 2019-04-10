@@ -42,6 +42,10 @@ describe('Placa Mercosul Brasil', function() {
       let _placa = placa.mask("ABC1D23");
       assert.equal(_placa, "ABC 1D23");
     });
+    it("Não deve aplicar a máscara na placa 123ABCD", () => {
+      let _placa = placa.mask("123ABCD");
+      assert.equal(_placa, "123ABCD");
+    });
   });
   describe('convert()', function() {
     it("Deve converter a placa antiga ABC9076 para ABC9A76", () => {
